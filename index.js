@@ -14,16 +14,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/read", async (req, res) => {
-  try {
     let users = await userModel.find();
     res.render("read", { users: users });
-  } catch (error) {
-    res.status(500).send("Error retrieving users");
-  }
 });
 
 app.get("/edit/:userid", async (req, res) => {
-  
   let user = await userModel.findOne({ _id: req.params.userid });
   res.render("edit", { user });
 });
@@ -39,22 +34,14 @@ app.post("/update/:userid", async (req, res) => {
 });
 
 app.get("/delete/:id", async (req, res) => {
-  try {
     await userModel.findOneAndDelete({ _id: req.params.id });
     res.redirect("/read");
-  } catch (error) {
-    res.status(500).send("Error deleting user");
-  }
 });
 
 app.post("/create", async (req, res) => {
-  try {
     let { name, email, image } = req.body;
     await userModel.create({ name, email, image });
     res.redirect("/read");
-  } catch (error) {
-    res.status(500).send("Error creating user");
-  }
 });
 
 app.listen(3000, () => {
