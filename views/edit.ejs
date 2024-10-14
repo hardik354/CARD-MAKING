@@ -3,24 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Update User</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Adding background animation */
+        body {
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+            background-size: cover;
+            animation: bgFade 15s infinite alternate;
+        }
+
+        @keyframes bgFade {
+            0% { filter: brightness(0.8); }
+            50% { filter: brightness(1); }
+            100% { filter: brightness(0.8); }
+        }
+    </style>
 </head>
-<body> 
-    <div class=" w-full h-full bg-zinc-900 p-10 text-white">
+<body>
+    <div class="min-h-screen flex items-center justify-center p-5 bg-black/50">
+        <div class="w-full max-w-md bg-white/80 backdrop-blur-md rounded-lg p-6 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+            <!-- Navigation -->
+            <div class="nav mb-10 text-center">
+                <a class="text-red-800 hover:text-red-600 font-bold text-xl transition duration-300" href="/read">Read Users</a>
+            </div>
 
-        <div class="nav mb-10">
-            <a class="text-red-800" href="/read">Read users</a>
+            <!-- Heading -->
+            <h1 class="text-4xl font-extrabold text-center tracking-tight mb-6 text-yellow-400 animate-pulse">Update User</h1>
+
+            <!-- Form -->
+            <form action="/update/<%= user._id %>" method="post" class="space-y-4">
+                <input class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg outline-none focus:border-yellow-400 transition duration-300 shadow-sm" type="text" name="name" placeholder="Name" value="<%= user.name %>">
+                
+                <input class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg outline-none focus:border-yellow-400 transition duration-300 shadow-sm" type="text" name="email" placeholder="Email" value="<%= user.email %>">
+                
+                <input class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg outline-none focus:border-yellow-400 transition duration-300 shadow-sm" type="text" name="image" placeholder="Image URL" value="<%= user.image %>">
+                
+                <button class="w-full py-3 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-orange-500 hover:to-yellow-400 text-black font-semibold rounded-lg transition duration-300 transform hover:scale-105" type="submit">Update User</button>
+            </form>
         </div>
-
-        <h1 class="text-3xl tracking-tighter mb-3 ">UPDATE USER</h1>
-        <form action="/update/<%= user._id %>" method="post">
-            <input class="px-5 py-2 m-1 border-2 border-zinc-200 rounded-lg outline-none bg-transparent" type="text" name="name" placeholder="Name" value="<%= user.name %>">
-            <input class="px-5 py-2  m-1 border-2 border-zinc-200 rounded-lg outline-none bg-transparent" type="text" name="email" placeholder="Email" value="<%= user.email %>" >
-            <input class="px-5 py-2 m-1 border-2 border-zinc-200 rounded-lg outline-none bg-transparent" type="text" name="image" placeholder="Image url" value="<%= user.image %>" >
-            <input class="px-5 py-2 ml-3 bg-yellow-300 text-black rounded-lg" type ="submit" value="Update User">
-        </form>
     </div>
 </body>
 </html>
