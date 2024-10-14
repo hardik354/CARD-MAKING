@@ -1,26 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create User</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Background and Animation */
+        body {
+            background: url('https://img.freepik.com/free-vector/geometric-gradient-futuristic-background_23-2149116406.jpg') no-repeat center center fixed;
+            background-size: cover;
+            animation: bgFade 15s infinite alternate;
+        }
+
+        @keyframes bgFade {
+            0% { filter: brightness(0.8); }
+            50% { filter: brightness(1); }
+            100% { filter: brightness(0.8); }
+        }
+
+        /* Smooth transitions on hover */
+        .input-field, .submit-btn {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input-field:focus {
+            border-color: #1D4ED8; /* Dark blue for focus effect */
+            box-shadow: 0 0 8px rgba(29, 78, 216, 0.3); /* Soft blue glow */
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Preview styling */
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
-<body> 
-    <div class=" w-full h-full bg-zinc-900 p-10 text-white">
 
-        <div class="nav mb-10">
-            <a class="text-red-800" href="/read">Read users</a>
+<body>
+    <div class="min-h-screen flex items-center justify-center p-5 bg-black/60">
+        <div class="w-full max-w-md bg-white/80 backdrop-blur-lg rounded-lg p-6 shadow-2xl transform hover:scale-105 transition-transform duration-300">
+            <!-- Navigation -->
+            <div class="nav mb-10 text-center">
+                <a class="text-red-800 hover:text-red-600 font-bold text-xl transition duration-300" href="/read">Read Users</a>
+            </div>
+
+            <!-- Heading -->
+            <h1 class="text-4xl font-extrabold text-center tracking-tight mb-6 text-blue-500 animate-pulse">Create User</h1>
+
+            <!-- Form -->
+            <form action="/create" method="post" class="space-y-4">
+                <input class="input-field w-full px-4 py-3 bg-white border border-gray-300 rounded-lg outline-none focus:border-blue-600 transition duration-300 shadow-sm" type="text" name="name" placeholder="Enter your Name">
+                
+                <input class="input-field w-full px-4 py-3 bg-white border border-gray-300 rounded-lg outline-none focus:border-blue-600 transition duration-300 shadow-sm" type="text" name="email" placeholder="Enter Email">
+                
+                <input class="input-field w-full px-4 py-3 bg-white border border-gray-300 rounded-lg outline-none focus:border-blue-600 transition duration-300 shadow-sm" type="text" name="image" placeholder="Enter Image URL" onchange="previewImageURL(event)">
+                
+                <img id="imagePreview" class="image-preview hidden" alt="Image Preview">
+
+                <button class="submit-btn w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-indigo-600 hover:to-blue-500 text-white font-semibold rounded-lg transition duration-300 transform hover:scale-105" type="submit">Create User</button>
+            </form>
         </div>
-
-        <h1 class="text-3xl tracking-tighter mb-3 ">CREATE USER</h1>
-        <form action="/create" method="post">
-            <input class="px-5 py-2 m-1 border-2 border-zinc-200 rounded-lg outline-none bg-transparent" type="text" name="name" placeholder="Name">
-            <input class="px-5 py-2  m-1 border-2 border-zinc-200 rounded-lg outline-none bg-transparent" type="text" name="email" placeholder="Email">
-            <input class="px-5 py-2 m-1 border-2 border-zinc-200 rounded-lg outline-none bg-transparent" type="text" name="image" placeholder="Image url">
-            <input class="px-5 py-2 ml-3 bg-blue-500 rounded-lg" type ="submit" value="Create User">
-        </form>
     </div>
+
+    <script>
+        // JavaScript to preview the image from the URL
+        function previewImageURL(event) {
+            const input = event.target;
+            const imagePreview = document.getElementById('imagePreview');
+            
+            if (input.value) {
+                imagePreview.src = input.value;
+                imagePreview.classList.remove('hidden');
+            } else {
+                imagePreview.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
+
 </html>
