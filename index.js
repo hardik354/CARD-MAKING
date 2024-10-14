@@ -14,11 +14,13 @@ app.get("/", (req, res) => {
 });
 
 app.get("/read", async (req, res) => {
+
     let users = await userModel.find();
-    res.render("read", { users: users });
+    res.render("read", {users});
 });
 
 app.get("/edit/:userid", async (req, res) => {
+  
   let user = await userModel.findOne({ _id: req.params.userid });
   res.render("edit", { user });
 });
