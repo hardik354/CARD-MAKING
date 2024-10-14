@@ -4,27 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>All Users</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Adding background animation */
+        body {
+            background: url('https://img.freepik.com/free-vector/geometric-gradient-futuristic-background_23-2149116406.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .user {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .user:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 
 <body>
-    <div class="w-full h-full bg-zinc-900 p-10 text-white">
-        <a class="text-yellow-300" href="/">Back to Home</a>
-        <h1 class="text-3xl tracking-tighter mb-3 mt-3">ALL USERS</h1>
-        <div class="users flex gap-3 flex-wrap">
+    <div class="min-h-screen bg-black/60 p-10 text-white">
+        <a class="text-yellow-300 hover:text-yellow-400 font-bold text-lg transition duration-300" href="/">Back to Home</a>
+        <h1 class="text-4xl tracking-tight mb-8 mt-5 text-yellow-400 font-extrabold">All Users</h1>
+        
+        <div class="users flex flex-wrap gap-6 justify-center">
             <% users.forEach(function(user){ %>
- <!-- users create karne ke liye -->
-                <div class="user w-72 p-5 bg-zinc-800 rounded-lg">
-                    <div class="w-full h-72 rounded-lg bg-blue-100 overflow-hidden">
-                        <img class="w-full h-full object-cover" src="<%= user.image %>" alt="">
+                <div class="user w-72 p-5 bg-zinc-800/80 rounded-lg backdrop-blur-sm overflow-hidden shadow-lg">
+                    <!-- User Image -->
+                    <div class="w-full h-72 rounded-lg overflow-hidden">
+                        <img class="w-full h-full object-cover transform hover:scale-110 transition duration-300" src="<%= user.image %>" alt="<%= user.name %>">
                     </div>
-                    <h3 class="text-xl mt-3 tracking-tighter"> <%= user.name %> </h3>
-                    <h5 class="text-zinc-500"><%= user.email %></h5>
-                    <div class="flex gap-3 mt-4">
-                        <a class="text-green-500" href="/edit/<%= user._id %>">Edit User</a>
-                        <a class="text-red-500" href="/delete/<%= user._id %>">Delete User</a>
+                    
+                    <!-- User Details -->
+                    <h3 class="text-2xl mt-4 font-bold tracking-tight text-white"><%= user.name %></h3>
+                    <h5 class="text-zinc-400"><%= user.email %></h5>
+                    
+                    <!-- Action Links -->
+                    <div class="flex gap-5 mt-6">
+                        <a class="text-green-500 hover:text-green-400 transition duration-300 font-semibold" href="/edit/<%= user._id %>">Edit User</a>
+                        <a class="text-red-500 hover:text-red-400 transition duration-300 font-semibold" href="/delete/<%= user._id %>">Delete User</a>
                     </div>
                 </div>
             <% }) %>
@@ -33,3 +54,4 @@
 </body>
 
 </html>
+ 
